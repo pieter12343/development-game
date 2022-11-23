@@ -8,7 +8,6 @@ public class player_movement : MonoBehaviour
     public float jumpForce;
     public float groundCheckLength;
 
-
     private Rigidbody2D rb2D;
 
 
@@ -21,21 +20,27 @@ public class player_movement : MonoBehaviour
     void Update()
     {
         float dir = Input.GetAxis("Horizontal");
+
         transform.Translate(transform.right * dir * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-        }
+        
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, groundCheckLength);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, groundCheckLength);
         if (hit.collider != null)
         {
-            Debug.Log("hit object = " + hit.collider.gameObject.name);
+            if (Input.GetButtonDown("Jump"))
+            {
+                rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            }
         }
-        else
+
+        if (dir > 0f)
         {
-            Debug.Log("hit nothing");
+            transform.localScale = new Vector2(1, 1);
+        }
+        else if (dir < 0f)
+        {
+            transform.localScale = new Vector2(-1, 1);
         }
 
         Debug.DrawRay(transform.position, -transform.up * groundCheckLength, Color.red);
