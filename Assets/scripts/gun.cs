@@ -1,37 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class gun : MonoBehaviour
 {
-    public float damage = 50f;
-    public float range = 100f;
-    public float impactForce = 300f;
-    public Camera fpsCam;
+    public float Bulletspeed = 10;
+    public GameObject bullet;
 
     void Update()
     {
+        float dirX = Input.GetAxis("Horizontal");
+
+        transform.Translate(transform.right * dirX * Bulletspeed * Time.deltaTime);
+
         if (Input.GetButtonDown("Fire1"))
         {
-            shoot();
+            Instantiate(bullet, transform.position, Quaternion.identity);
         }
     }
-    void shoot()
-    {
 
-        RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-        {
-            Debug.Log(hit.transform.name);
-
-            Target target = hit.transform.GetComponent<Target>();
-            if (target != null)
-            {
-                target.TakeDamage(damage);
-            }
-            if (hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(-hit.normal * impactForce);
-            }
-        }
-    }
 }
-

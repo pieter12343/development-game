@@ -8,8 +8,6 @@ public class enemy_spawner : MonoBehaviour
     public float xMax;
     public float yMin;
     public float yMax;
-    public float zMin;
-    public float zMax;
 
     public GameObject enemy;
     public Transform prefab;
@@ -18,8 +16,8 @@ public class enemy_spawner : MonoBehaviour
     {
         for (int i = 0; i < 10; i++)
         {
-            Instantiate(enemy, new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), Random.Range(zMin, zMax)), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
+            Instantiate(enemy, new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax)), Quaternion.identity);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
