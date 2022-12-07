@@ -8,6 +8,10 @@ public class monster_damage : MonoBehaviour
     public player_health playerhealth;
     public player_movement player_Movement;
 
+
+    public int maxHealth = 10;
+    public int health;
+
     // Start is called before the first frame update
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,6 +27,14 @@ public class monster_damage : MonoBehaviour
                 player_Movement.KnockFromRight = false;
             }
             playerhealth.TakeDamage(damage);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
         }
     }
 }

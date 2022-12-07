@@ -18,6 +18,8 @@ public class player_movement : MonoBehaviour
 
     public float Bulletspeed = 10;
     public GameObject bullet;
+    public float facingDirX = 1;
+    public GameObject barrel;
 
     private void Start()
     {
@@ -27,13 +29,17 @@ public class player_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float dirX = Input.GetAxis("Horizontal");
+        float dirX = Input.GetAxisRaw("Horizontal");
 
-        transform.Translate(transform.right * dirX * Bulletspeed * Time.deltaTime);
+        if (dirX == -1 || dirX == 1)
+        {
+            facingDirX = dirX;
+        }
 
         if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(bullet, transform.position, Quaternion.identity);
+            GameObject spawnedBullet = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
+            spawnedBullet.GetComponent<bullet>().dirX = facingDirX;
         }
 
         float dir = Input.GetAxis("Horizontal");
@@ -75,16 +81,5 @@ public class player_movement : MonoBehaviour
             facingRight = false;
         }
         Debug.DrawRay(transform.position, -transform.up * groundCheckLength, Color.red);
-    }
-    private void Flip()
-    {
-        if (facingRight != true)
-        {
-            transform.Rotate(0f, 180f, 0f);
-        }
-        else
-        {
-            transform.Rotate(0f, 180f, 0f);
-        }
     }
 }

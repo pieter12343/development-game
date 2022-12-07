@@ -1772,12 +1772,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753372913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.27, y: -1.6, z: 0}
+  m_LocalPosition: {x: -6.208, y: -1.6, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 990952428}
   - {fileID: 1549655183}
+  - {fileID: 1325444004}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1793,8 +1794,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427a7c9a378c14c45863b089b4f36149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  jumpForce: 3
+  speed: 1
+  jumpForce: 4
   groundCheckLength: 0.3
   KBForce: 1
   KBCounter: 0
@@ -1802,6 +1803,8 @@ MonoBehaviour:
   KnockFromRight: 0
   Bulletspeed: 10
   bullet: {fileID: 593585598836214824, guid: b216ef8791a01ed46a36a5406d28dee4, type: 3}
+  facingDirX: 1
+  barrel: {fileID: 1325444003}
 --- !u!50 &753372916
 Rigidbody2D:
   serializedVersion: 4
@@ -3950,6 +3953,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1325444003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1325444004}
+  m_Layer: 0
+  m_Name: barrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1325444004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325444003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.55, y: 0.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 753372914}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1346605889
 GameObject:
   m_ObjectHideFlags: 0
@@ -4370,7 +4404,7 @@ MonoBehaviour:
   patrol_points:
   - {fileID: 23975784}
   - {fileID: 1348210087}
-  moveSpeed: 2
+  moveSpeed: 1
   patrolDestination: 4
   playerTransform: {fileID: 753372914}
   isChasing: 0
@@ -4390,6 +4424,8 @@ MonoBehaviour:
   damage: 2
   playerhealth: {fileID: 753372919}
   player_Movement: {fileID: 753372915}
+  maxHealth: 10
+  health: 0
 --- !u!70 &1470036152
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5893,6 +5929,7 @@ GameObject:
   - component: {fileID: 1822405687}
   - component: {fileID: 1822405688}
   - component: {fileID: 1822405689}
+  - component: {fileID: 1822405690}
   m_Layer: 0
   m_Name: mushroom
   m_TagString: Enemy
@@ -5929,8 +5966,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009137273, y: -0.07694222}
-  m_Size: {x: 0.15549445, y: 0.35377726}
+  m_Offset: {x: 0.011239111, y: -0.07694222}
+  m_Size: {x: 0.15129077, y: 0.35377726}
   m_Direction: 0
 --- !u!50 &1822405686
 Rigidbody2D:
@@ -5968,6 +6005,8 @@ MonoBehaviour:
   damage: 2
   playerhealth: {fileID: 753372919}
   player_Movement: {fileID: 753372915}
+  maxHealth: 10
+  health: 0
 --- !u!114 &1822405688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5983,7 +6022,7 @@ MonoBehaviour:
   patrol_points:
   - {fileID: 239211612}
   - {fileID: 1067769077}
-  moveSpeed: 2
+  moveSpeed: 0.5
   patrolDestination: 1
   playerTransform: {fileID: 753372914}
   isChasing: 0
@@ -6008,6 +6047,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &1822405690
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822405683}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.010437489, y: -0.07581729}
+  m_Size: {x: 0.14512467, y: 0.35838377}
+  m_Direction: 0
 --- !u!1 &1860787294
 GameObject:
   m_ObjectHideFlags: 0

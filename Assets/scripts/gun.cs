@@ -6,17 +6,24 @@ public class gun : MonoBehaviour
 {
     public float Bulletspeed = 10;
     public GameObject bullet;
+    public float facingDirX = 1;
+    public GameObject barrel;
 
     void Update()
     {
-        float dirX = Input.GetAxis("Horizontal");
+        float dirX = Input.GetAxisRaw("Horizontal");
 
-        transform.Translate(transform.right * dirX * Bulletspeed * Time.deltaTime);
+        if (dirX == -1 || dirX == 1)
+        {
+            facingDirX = dirX;
+        }
 
         if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(bullet, transform.position, Quaternion.identity);
+            GameObject spawnedBullet = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
+            spawnedBullet.GetComponent<bullet>().dirX = facingDirX;
         }
+
     }
 
 }

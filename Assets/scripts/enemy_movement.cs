@@ -56,6 +56,5 @@ public class enemy_movement : MonoBehaviour
             }
             
         }
-        GetComponent<Animator>().SetFloat("Animate", moveSpeed);
     }
 }
