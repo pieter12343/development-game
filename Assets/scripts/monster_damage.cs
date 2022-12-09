@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class monster_damage : MonoBehaviour
 {
+    public Rigidbody2D rd2D;
     public int damage;
     public player_health playerhealth;
     public player_movement player_Movement;
 
-
-    public int maxHealth = 10;
-    public int health;
+    public Animator animator;
+    public float timer = 0.5f;
+    public bool isHit;
 
     // Start is called before the first frame update
     private void OnCollisionEnter2D(Collision2D collision)
@@ -32,9 +33,25 @@ public class monster_damage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            Destroy(gameObject);
+            rd2D.constraints = RigidbodyConstraints2D.FreezeAll;
+            isHit = true;
+            animator.SetBool("takeDamage", true);
+            
+        }
+    }
+    private void Update()
+    {
+        if (isHit)
+        {
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
