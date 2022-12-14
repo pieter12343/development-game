@@ -20,6 +20,7 @@ public class player_movement : MonoBehaviour
     public GameObject bullet;
     public float facingDirX = 1;
     public GameObject barrel;
+    AudioSource audiodata;
 
     private void Start()
     {
@@ -36,10 +37,12 @@ public class player_movement : MonoBehaviour
             facingDirX = dirX;
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("R"))
         {
             GameObject spawnedBullet = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
             spawnedBullet.GetComponent<bullet>().dirX = facingDirX;
+            audiodata = GetComponent<AudioSource>();
+            audiodata.Play(0);
         }
 
         float dir = Input.GetAxis("Horizontal");
@@ -80,6 +83,6 @@ public class player_movement : MonoBehaviour
             transform.localScale = new Vector2(-0.2f, 0.2f);
             facingRight = false;
         }
-        Debug.DrawRay(transform.position, -transform.up * groundCheckLength, Color.red);
+        Debug.DrawRay(transform.position, -transform.up * groundCheckLength, Color.green);
     }
 }

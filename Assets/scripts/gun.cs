@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class gun : MonoBehaviour
 {
+    AudioSource audiodata;
     public float Bulletspeed = 10;
     public GameObject bullet;
     public float facingDirX = 1;
@@ -22,6 +23,8 @@ public class gun : MonoBehaviour
         {
             GameObject spawnedBullet = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
             spawnedBullet.GetComponent<bullet>().dirX = facingDirX;
+            audiodata = GetComponent<AudioSource>();
+            audiodata.Play(0);
         }
 
     }

@@ -12,6 +12,8 @@ public class monster_damage : MonoBehaviour
     public Animator animator;
     public float timer = 0.5f;
     public bool isHit;
+    public GameObject mushroom;
+    public bool death = false;
 
     // Start is called before the first frame update
     private void OnCollisionEnter2D(Collision2D collision)
@@ -46,11 +48,21 @@ public class monster_damage : MonoBehaviour
     {
         if (isHit)
         {
+            Debug.Log("isHit");
             timer -= Time.deltaTime;
 
             if (timer <= 0)
             {
+                Debug.Log("isTimer");
+                death = true;
+            }
+            if (death == true)
+            {
+                Debug.Log("isDeath");
+                
+                animator.SetBool("takeDamage", true);
                 Destroy(gameObject);
+                score1.scoreValue += 10;
             }
         }
     }
