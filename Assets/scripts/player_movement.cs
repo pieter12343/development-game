@@ -37,7 +37,7 @@ public class player_movement : MonoBehaviour
             facingDirX = dirX;
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             GameObject spawnedBullet = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
             spawnedBullet.GetComponent<bullet>().dirX = facingDirX;

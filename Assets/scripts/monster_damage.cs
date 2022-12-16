@@ -48,18 +48,14 @@ public class monster_damage : MonoBehaviour
     {
         if (isHit)
         {
-            Debug.Log("isHit");
             timer -= Time.deltaTime;
 
             if (timer <= 0)
             {
-                Debug.Log("isTimer");
                 death = true;
             }
             if (death == true)
             {
-                Debug.Log("isDeath");
-                
                 animator.SetBool("takeDamage", true);
                 Destroy(gameObject);
                 score1.scoreValue += 10;
